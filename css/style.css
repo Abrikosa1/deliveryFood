@@ -33,6 +33,7 @@ body {
 .input-search {
   width: 300px;
   background-image: url(../img/search.svg);
+  margin-left: auto;
 }
 .buttons {
   display: flex;
@@ -58,6 +59,9 @@ body {
 }
 .button-icon {
   margin-right: 6px;
+}
+.button-card-text {
+  margin-right: 10px;
 }
 .promo {
   box-shadow: 0px 7px 12px rgba(158, 158, 163, 0.1);
@@ -89,10 +93,11 @@ body {
   line-height: 42px;
   margin: 0;
   color: #000;
+  margin-right: 30px;
 }
 .section-heading {
   display: flex;
-  justify-content: space-between;
+
   align-items: center;
   margin-bottom: 44px;
 }
@@ -109,11 +114,12 @@ body {
   overflow: hidden;
   margin-bottom: 30px;
   flex-basis: 32%;
+  text-decoration: none;
 }
 .card-image {
-  width: 384px;
-  height: 250px;
+  width: 100%;
   object-fit: cover;
+  object-position: center;
 }
 .card-text {
   padding: 20px 35px 23px 23px;
@@ -130,6 +136,14 @@ body {
   line-height: 32px;
   margin: 0;
 }
+.card-title-reg {
+  font-weight: 400;
+  margin-bottom: 10px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 32px;
+}
 .card-tag {
   font-style: normal;
   font-weight: normal;
@@ -144,6 +158,18 @@ body {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+}
+.card-buttons {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+}
+.card-price-bold {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 32px;
+  margin-left: 32px;
 }
 .rating {
   margin-right: 26px;
@@ -174,6 +200,11 @@ body {
   vertical-align: middle;
   border-radius: 50%;
   margin-left: 10px;
+}
+.ingridients {
+  font-size: 18px;
+  line-height: 21px;
+  color: #8c8c8c;
 }
 .main {
   background: linear-gradient(
@@ -217,10 +248,6 @@ body {
   .container {
     max-width: 960px;
   }
-  .promo {
-    /* background-size: ;
-    background-position: 0 0; */
-  }
   .category,
   .price {
     font-size: 14px;
@@ -259,7 +286,7 @@ body {
   .card-info {
     flex-wrap: wrap;
   }
-  .rating {
+  .card .rating {
     flex-basis: 100%;
   }
   .card-title {
@@ -321,8 +348,11 @@ body {
   .section-heading {
     flex-direction: column;
   }
+  .section-title {
+    margin-right: 0;
+  }
   .input-search {
-    width: 90%;
+    width: 100%;
   }
   .button-text {
     display: none;
