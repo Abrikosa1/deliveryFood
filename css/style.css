@@ -65,7 +65,7 @@ body {
 }
 .promo {
   box-shadow: 0px 7px 12px rgba(158, 158, 163, 0.1);
-  background: #fff1b8 url(../img/promo-img.png) no-repeat top -95px right -100px /
+  background: #fff1b8 url(../img/promo-img.png) no-repeat top -95px right -220px /
     600px;
   border-radius: 10px;
   padding: 68px 70px;
@@ -441,6 +441,9 @@ body {
   }
   .card {
     flex-basis: 100%;
+  }
+  .card-text{
+    height: unset;
   }
   .card-image {
     width: 100%;
