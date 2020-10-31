@@ -37,6 +37,7 @@ const cartButton = document.querySelector('#cart-button'),
       restaurantPrice = document.querySelector('.price'),
       restaurantCategory = document.querySelector('.category'),
       inputSearch = document.querySelector('.input-search'),
+      inputAddress = document.querySelector('.input-address'),
       modalBody = document.querySelector('.modal-body'),
       modalPrice = document.querySelector('.modal-price-tag'),
       buttonClearCart = document.querySelector('.clear-cart'),
@@ -389,51 +390,101 @@ const init = () => {
 
   checkAuth();
 
-  inputSearch.addEventListener('keypress', (e) => {
-    if(e.charCode === 13) {
+  //   inputSearch.addEventListener('keypress', (e) => {
+  //   if(e.charCode === 13) {
 
-      const value = e.target.value.trim();
+  //     const value = e.target.value.trim();
 
-      if(!value) {
-        e.target.style.backgroundColor = 'red';
-        e.target.value = '';
-        setTimeout(() => {
-          e.target.style.backgroundColor = '';
-        }, 1500);
-        return;
-      }
+  //     if(!value) {
+  //       e.target.style.backgroundColor = 'red';
+  //       e.target.value = '';
+  //       setTimeout(() => {
+  //         e.target.style.backgroundColor = '';
+  //       }, 1500);
+  //       return;
+  //     }
 
-      getData('./db/partners.json')
-      .then(data =>{
-        return data.map(partner => {
-          return partner.products;
-        });
-      })
-      .then(linksProducts => {
-        cardsMenu.textContent = '';
-        linksProducts.forEach(link => {
-          getData(`./db/${link}`)
-          .then(data => {
+  //     getData('./db/partners.json')
+  //     .then(data =>{
+  //       return data.map(partner => {
+  //         return partner.products;
+  //       });
+  //     })
+  //     .then(linksProducts => {
+  //       cardsMenu.textContent = '';
+  //       linksProducts.forEach(link => {
+  //         getData(`./db/${link}`)
+  //         .then(data => {
 
-            const searchResult = data.filter(item => {
-              const name = item.name.toLowerCase();
-              return name.includes(value.toLowerCase());
-            });
+  //           const searchResult = data.filter(item => {
+  //             const name = item.name.toLowerCase();
+  //             return name.includes(value.toLowerCase());
+  //           });
 
-            containerPromo.classList.add('hide');
-            swiper.destroy(false, false);
-            restaurants.classList.add('hide');
-            menu.classList.remove('hide');
+  //           containerPromo.classList.add('hide');
+  //           swiper.destroy(false, false);
+  //           restaurants.classList.add('hide');
+  //           menu.classList.remove('hide');
         
-            restaurantTitle.textContent = 'Результат поиска';
-            restaurantRating.textContent =  '';
-            restaurantPrice.textContent = '';
-            restaurantCategory.textContent = '';
-            searchResult.forEach(createGoodCard);
-          })
+  //           restaurantTitle.textContent = 'Результат поиска';
+  //           restaurantRating.textContent =  '';
+  //           restaurantPrice.textContent = '';
+  //           restaurantCategory.textContent = '';
+  //           searchResult.forEach(createGoodCard);
+  //         })
+  //       })
+  //     })
+  //   }
+  // });
+  inputAddress.addEventListener('keyup', (e) => {
+
+    const value = e.target.value.trim();
+
+    if(!value && e.charCode === 13) {
+      e.target.style.backgroundColor = 'red';
+      e.target.value = '';
+      setTimeout(() => {
+        e.target.style.backgroundColor = '';
+      }, 1500);
+      return;
+    }
+    
+    if(!/^[А-Яа-яёЁ]$/.test(e.key)) return;
+
+    if(value.length < 3) return;
+     
+
+    getData('./db/partners.json')
+    .then(data =>{
+      return data.map(partner => {
+        return partner.products;
+      });
+    })
+    .then(linksProducts => {
+      cardsMenu.textContent = '';
+      linksProducts.forEach(link => {
+        getData(`./db/${link}`)
+        .then(data => {
+
+          const searchResult = data.filter(item => {
+            const name = item.name.toLowerCase();
+            return name.includes(value.toLowerCase());
+          });
+
+          containerPromo.classList.add('hide');
+          swiper.destroy(false, false);
+          restaurants.classList.add('hide');
+          menu.classList.remove('hide');
+      
+          restaurantTitle.textContent = 'Результат поиска';
+          restaurantRating.textContent =  '';
+          restaurantPrice.textContent = '';
+          restaurantCategory.textContent = '';
+          searchResult.forEach(createGoodCard);
         })
       })
-    }
+    })
+
   });
 };
 
